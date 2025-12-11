@@ -4,6 +4,21 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mandarin Morocco — авторские туры по Марокко</title>
+/* Фон с мандаринами по всей странице */
+body {
+  background: none !important;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(5, 5, 9, 0.9), rgba(5, 5, 9, 0.98)),
+    url("mandarins-morocco.jpg.PNG") center/cover no-repeat;
+  z-index: -1;
+  pointer-events: none;
+}
   <style>
     :root {
       --bg-main: #050509;
