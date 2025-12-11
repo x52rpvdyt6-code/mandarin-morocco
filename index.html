@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Mandarin Morocco — авторские туры по Марокко</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #0f1014;
+      --card-bg: #16171d;
+      --accent: #ff8a2b;
+      --accent-soft: rgba(255,138,43,0.12);
+      --text-main: #f9fafb;
+      --text-muted: #a3a3b0;
+      --border-subtle: #262733;
+      --radius-lg: 18px;
+      --radius-md: 12px;
+      --shadow-soft: 0 18px 45px rgba(0,0,0,0.45);
+      --max-width: 1120px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Roboto", "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top left, #1e2029 0, #050509 55%);
+      color: var(--text-main);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .wrapper {
+      width: 100%;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    /* HEADER */
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      backdrop-filter: blur(18px);
+      background: linear-gradient(
+        to bottom,
+        rgba(5,5,9,0.96) 0,
+        rgba(5,5,9,0.92) 60%,
+        transparent 100%
+      );
+      border-bottom: 1px solid rgba(255,255,255,0.02);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 16px;
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+      font-size: 15px;
+    }
+
+    .logo-mark {
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 20%, #ffe8b5 0, #ff8a2b 30%, #f25c05 70%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 0 1px rgba(0,0,0,0.25);
+      font-size: 16px;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    .nav a {
+      position: relative;
+    }
+
+    .nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 0;
+      height: 1px;
+      background: var(--accent);
+      transition: width 0.18s ease;
+    }
+
+    .nav a:hover {
+      color: var(--text-main);
+    }
+
+    .nav a:hover::after {
+      width: 100%;
+    }
+
+    .nav-cta {
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #ffb347, #ff7b1a);
+      color: #111;
+      font-weight: 600;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+      border: none;
+      cursor: pointer;
+      font-size: 13px;
+      transition: transform 0.1s ease, box-shadow 0.1s ease, filter 0.1s ease;
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.03);
+      box-shadow: 0 12px 28px rgba(0,0,0,0.6);
+    }
+
+    /* HERO */
+
+    .hero {
+      padding: 72px 0 40px;
+    }
+
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .hero-left {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(7,7,12,0.8);
+      border: 1px solid rgba(255,255,255,0.06);
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 18px;
+    }
+
+    .hero-label span {
+      font-size: 14px;
+    }
+
+    .hero-title {
+      font-size: clamp(30px, 4vw, 40px);
+      line-height: 1.03;
+      letter-spacing: -0.03em;
+      margin-bottom: 16px;
+    }
+
+    .hero-title span {
+      background: linear-gradient(120deg, #ffe8b5, #ff8a2b, #fffbf5);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: 15px;
+      color: var(--text-muted);
+      max-width: 420px;
+      line-height: 1.6;
+      margin-bottom: 22px;
+    }
+
+    .hero-cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .btn-primary {
+      padding: 13px 22px;
+      border-radius: 999px;
+      border: none;
+      background: linear-gradient(135deg, #ffb347, #ff7b1a);
+      color: #141217;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      box-shadow: 0 16px 36px rgba(0,0,0,0.7);
+      transition: transform 0.1s ease, box-shadow 0.1s ease, filter 0.1s ease;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.04);
+      box-shadow: 0 18px 40px rgba(0,0,0,0.8);
+    }
+
+    .btn-ghost {
+      padding: 11px 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: transparent;
+      color: var(--text-main);
+      font-size: 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+
+    .btn-ghost span {
+      font-size: 17px;
+    }
+
+    .hero-mini {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .hero-mini strong {
+      color: var(--text-main);
+      font-weight: 600;
+    }
+
+    .hero-right {
+      position: relative;
+    }
+
+    .hero-card {
+      border-radius: 28px;
+      background:
+        radial-gradient(circle at top left, rgba(255,138,43,0.23) 0, transparent 40%),
+        radial-gradient(circle at bottom right, rgba(9,9,16,0.95) 0, #050509 40%);
+      box-shadow: var(--shadow-soft);
+      padding: 18px;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    /* ВАЖНО: тут фон с мандаринами */
+    .hero-photo {
+      position: relative;
+      border-radius: 22px;
+      overflow: hidden;
+      background:
+        linear-gradient(to top, rgba(0,0,0,0.65), rgba(0,0,0,0.1)),
+        url("mandarins-morocco.jpg") center/cover no-repeat;
+      height: 260px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-end;
+      padding: 18px;
+      color: #fffaf4;
+    }
+
+    .hero-badge {
+      font-size: 11px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: rgba(0,0,0,0.52);
+      border: 1px solid rgba(255,255,255,0.3);
+      margin-bottom: 6px;
+    }
+
+    .hero-photo-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .hero-photo-sub {
+      font-size: 13px;
+      opacity: 0.92;
+      max-width: 240px;
+    }
+
+    .hero-meta-strip {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 14px;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .hero-pill {
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(0,0,0,0.55);
+      border: 1px dashed rgba(255,255,255,0.18);
+      font-size: 11px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .hero-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .hero-stat-pill {
+      padding: 5px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.06);
+      background: rgba(9,9,16,0.88);
+    }
+
+    /* SECTION LAYOUT */
+
+    section {
+      padding: 24px 0 8px;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 18px;
+      gap: 12px;
+    }
+
+    .section-title {
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+
+    .section-subtitle {
+      font-size: 13px;
+      color: var(--text-muted);
+      max-width: 360px;
+    }
+
+    /* TOURS GRID */
+
+    .tours-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0,1fr));
+      gap: 16px;
+    }
+
+    .tour-card {
+      border-radius: var(--radius-lg);
+      padding: 14px;
+      background: radial-gradient(circle at top left, rgba(255,138,43,0.38) 0, rgba(10,10,18,1) 45%);
+      border: 1px solid rgba(255,255,255,0.06);
+      box-shadow: 0 16px 35px rgba(0,0,0,0.6);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .tour-tag {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .tour-name {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+
+    .tour-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .tour-meta span {
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(8,8,14,0.92);
+    }
+
+    .tour-price {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .tour-btn {
+      font-size: 12px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      background: rgba(0,0,0,0.86);
+      color: var(--text-main);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .tour-btn span {
+      opacity: 0.8;
+    }
+
+    /* HOW IT WORKS */
+
+    .steps-row {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 14px;
+    }
+
+    .step {
+      border-radius: var(--radius-md);
+      background: rgba(10,10,16,0.9);
+      border: 1px solid var(--border-subtle);
+      padding: 14px;
+      font-size: 13px;
+    }
+
+    .step-num {
+      width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      margin-bottom: 4px;
+      background: var(--accent-soft);
+      color: #ffb347;
+      border: 1px solid rgba(255,138,43,0.6);
+    }
+
+    .step-title {
+      font-weight: 600;
+      margin-bottom: 4px;
+      font-size: 14px;
+    }
+
+    .step-text {
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* BENEFITS */
+
+    .benefits-row {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 14px;
+    }
+
+    .benefit {
+      border-radius: var(--radius-md);
+      background: rgba(8,8,14,0.9);
+      border: 1px solid var(--border-subtle);
+      padding: 14px;
+      font-size: 13px;
+      display: flex;
+      gap: 10px;
+    }
+
+    .benefit-emoji {
+      font-size: 20px;
+    }
+
+    .benefit-title {
+      font-weight: 600;
+      margin-bottom: 4px;
+      font-size: 14px;
+    }
+
+    .benefit-text {
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* FAQ */
+
+    .faq-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 24px;
+      align-items: flex-start;
+    }
+
+    details {
+      border-radius: var(--radius-md);
+      background: rgba(9,9,15,0.95);
+      border: 1px solid var(--border-subtle);
+      padding: 10px 12px;
+      margin-bottom: 8px;
+      font-size: 13px;
+    }
+
+    summary {
+      cursor: pointer;
+      list-style: none;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    summary span {
+      font-weight: 500;
+    }
+
+    details[open] {
+      border-color: rgba(255,138,43,0.5);
+      background: radial-gradient(circle at top left, rgba(255,138,43,0.14) 0, rgba(9,9,15,0.98) 40%);
+    }
+
+    details p {
+      margin-top: 6px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .faq-note {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* CONTACT */
+
+    .contact-card {
+      border-radius: var(--radius-lg);
+      background: radial-gradient(circle at top left, rgba(255,138,43,0.18) 0, rgba(8,8,14,0.96) 45%);
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 16px;
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 18px;
+      box-shadow: var(--shadow-soft);
+      margin-bottom: 26px;
+    }
+
+    .contact-card h3 {
+      font-size: 18px;
+      margin-bottom: 6px;
+    }
+
+    .contact-card p {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    form {
+      display: grid;
+      gap: 10px;
+      font-size: 13px;
+    }
+
+    label {
+      display: grid;
+      gap: 4px;
+    }
+
+    input,
+    textarea {
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(6,6,12,0.96);
+      padding: 9px 11px;
+      color: var(--text-main);
+      font-size: 13px;
+      outline: none;
+    }
+
+    textarea {
+      border-radius: 14px;
+      min-height: 70px;
+      resize: vertical;
+      padding-bottom: 10px;
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: #5f6070;
+    }
+
+    .contact-meta {
+      font-size: 13px;
+      color: var(--text-muted);
+      display: grid;
+      gap: 6px;
+    }
+
+    .contact-meta a {
+      color: #ffd49f;
+      text-decoration: underline;
+      text-decoration-style: dotted;
+      text-underline-offset: 3px;
+    }
+
+    /* FOOTER */
+
+    footer {
+      border-top: 1px solid rgba(255,255,255,0.04);
+      margin-top: auto;
+      padding: 14px 0 18px;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .footer-inner a {
+      color: inherit;
+    }
+
+    /* RESPONSIVE */
+
+    @media (max-width: 960px) {
+      .hero-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding-top: 60px;
+      }
+
+      .tours-grid {
+        grid-template-columns: repeat(2, minmax(0,1fr));
+      }
+
+      .steps-row,
+      .benefits-row {
+        grid-template-columns: repeat(2, minmax(0,1fr));
+      }
+
+      .faq-grid,
+      .contact-card {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .header-inner {
+        padding-inline: 12px;
+      }
+
+      .nav {
+        display: none;
+      }
+
+      .hero {
+        padding: 48px 0 28px;
+      }
+
+      .hero-card {
+        margin-top: 10px;
+      }
+
+      .tours-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .steps-row,
+      .benefits-row {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-card {
+        padding: 14px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <!-- HEADER -->
+    <header>
+      <div class="header-inner">
+        <div class="logo">
+          <div class="logo-mark">🍊</div>
+          <div>Mandarin&nbsp;Morocco</div>
+        </div>
+        <nav class="nav">
+          <a href="#tours">Туры</a>
+          <a href="#how">Как это работает</a>
+          <a href="#faq">Вопросы</a>
+          <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'});">
+            Подобрать тур
+          </button>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <!-- HERO -->
+      <section class="hero">
+        <div class="wrapper">
+          <div class="hero-inner">
+            <div class="hero-left">
+              <div class="hero-label">
+                <span>🍊</span> Авторские туры по Марокко
+              </div>
+              <h1 class="hero-title">
+                Марокко, где пахнет <span>мандаринами</span> и океаном.
+              </h1>
+              <p class="hero-subtitle">
+                Собираем маршруты под тебя: Марракеш, Сахара, Эссуэйра, горы и&nbsp;маленькие рыбацкие города — без толпы, с любимыми видами и вкусной едой.
+              </p>
+              <div class="hero-cta-row">
+                <button class="btn-primary" onclick="document.getElementById('tours').scrollIntoView({behavior:'smooth'});">
+                  Смотреть варианты туров
+                </button>
+                <button class="btn-ghost">
+                  <span>💬</span> Написать в WhatsApp
+                </button>
+              </div>
+              <div class="hero-mini">
+                <div><strong>4–10 дней</strong> — форматы туров</div>
+                <div>Небольшие группы до&nbsp;10 человек</div>
+              </div>
+            </div>
+
+            <div class="hero-right">
+              <div class="hero-card">
+                <div class="hero-photo">
+                  <div class="hero-badge">Марракеш · Апельсиновые сады</div>
+                  <div class="hero-photo-title">🌿 Sunset &amp; Mandarins</div>
+                  <div class="hero-photo-sub">
+                    Вечерний Марракеш, терасса с видом на Медину, сладкий чай и свежие мандарины с местного рынка.
+                  </div>
+                  <div class="hero-meta-strip">
+                    <div class="hero-pill">
+                      <span>🍊</span> Дегустация фруктов и специй
+                    </div>
+                  </div>
+                </div>
+
+                <div class="hero-stats">
+                  <div class="hero-stat-pill">3–7 ночей в Марракеше</div>
+                  <div class="hero-stat-pill">Пустыня, океан или горы на выбор</div>
+                  <div class="hero-stat-pill">Локальные гиды и красивые точки для фото</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TOURS -->
+      <section id="tours">
+        <div class="wrapper">
+          <div class="section-header">
+            <div>
+              <h2 class="section-title">Выбери свой тур по Марокко</h2>
+              <p class="section-subtitle">
+                Все маршруты можно адаптировать под тебя: даты, длительность, уровень отелей и насыщенность программы.
+              </p>
+            </div>
+          </div>
+
+          <div class="tours-grid">
+            <article class="tour-card">
+              <div>
+                <div class="tour-tag">Для первого знакомства</div>
+                <h3 class="tour-name">Уикенд в Марракеше</h3>
+                <div class="tour-meta">
+                  <span>3–4 дня</span>
+                  <span>Марракеш</span>
+                  <span>Группа 4–10 человек</span>
+                </div>
+                <div class="tour-price">от 490&nbsp;€ за человека</div>
+              </div>
+              <button class="tour-btn">
+                <span>Подробнее о программе</span>
+                <strong>→</strong>
+              </button>
+            </article>
+
+            <article class="tour-card">
+              <div>
+                <div class="tour-tag">Ночёвка в пустыне</div>
+                <h3 class="tour-name">Сахара и звёзды</h3>
+                <div class="tour-meta">
+                  <span>4–6 дней</span>
+                  <span>Марракеш · Мерзуга</span>
+                  <span>Кэмп в дюнах</span>
+                </div>
+                <div class="tour-price">от 790&nbsp;€ за человека</div>
+              </div>
+              <button class="tour-btn">
+                <span>Смотреть маршрут</span>
+                <strong>→</strong>
+              </button>
+            </article>
+
+            <article class="tour-card">
+              <div>
+                <div class="tour-tag">Океан и серфинг</div>
+                <h3 class="tour-name">Марокко у моря</h3>
+                <div class="tour-meta">
+                  <span>5–7 дней</span>
+                  <span>Эссуэйра · Тагазут</span>
+                  <span>Мягкий серф</span>
+                </div>
+                <div class="tour-price">от 850&nbsp;€ за человека</div>
+              </div>
+              <button class="tour-btn">
+                <span>Запросить даты</span>
+                <strong>→</strong>
+              </button>
+            </article>
+
+            <article class="tour-card">
+              <div>
+                <div class="tour-tag">Фуд-тур</div>
+                <h3 class="tour-name">Марокко для гурманов</h3>
+                <div class="tour-meta">
+                  <span>4–5 дней</span>
+                  <span>Марракеш + рынки</span>
+                  <span>Мастер-класс по таджину</span>
+                </div>
+                <div class="tour-price">от 690&nbsp;€ за человека</div>
+              </div>
+              <button class="tour-btn">
+                <span>Получить программу</span>
+                <strong>→</strong>
+              </button>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- HOW IT WORKS -->
+      <section id="how">
+        <div class="wrapper">
+          <div class="section-header">
+            <div>
+              <h2 class="section-title">Как мы собираем тур под тебя</h2>
+              <p class="section-subtitle">
+                Минимум созвонов и вопросов. Ты заполняешь короткую анкету — мы возвращаемся с понятной программой и ценой.
+              </p>
+            </div>
+          </div>
+
+          <div class="steps-row">
+            <div class="step">
+              <div class="step-num">1</div>
+              <div class="step-title">Рассказываешь, как хочется отдыхать</div>
+              <p class="step-text">
+                Пишешь нам в WhatsApp или заполняешь форму на сайте: даты, примерный бюджет, формат — активный, расслабленный, смешанный.
+              </p>
+            </div>
+            <div class="step">
+              <div class="step-num">2</div>
+              <div class="step-title">Получаешь 1–2 варианта маршрута</div>
+              <p class="step-text">
+                Мы собираем маршрут, который реально выдержать, без «10 городов за 3 дня». Оставляем место для спонтанности и отдыха.
+              </p>
+            </div>
+            <div class="step">
+              <div class="step-num">3</div>
+              <div class="step-title">Бронируем и остаёмся на связи</div>
+              <p class="step-text">
+                Помогаем с отелями, трансферами и активностями. Ты прилетаешь, мы встречаем, дальше — только красивые виды и мандарины.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- BENEFITS -->
+      <section>
+        <div class="wrapper">
+          <div class="section-header">
+            <div>
+              <h2 class="section-title">Почему с нами спокойно</h2>
+              <p class="section-subtitle">
+                Мы живём в Марокко и работает только с проверенными водителями, отелями и гидами. Без «потом доплатите».
+              </p>
+            </div>
+          </div>
+
+          <div class="benefits-row">
+            <div class="benefit">
+              <div class="benefit-emoji">📍</div>
+              <div>
+                <div class="benefit-title">Локальный взгляд</div>
+                <p class="benefit-text">
+                  Показываем не только «открыточные» места, но и любимые кафе, рынки, кварталы, где вкусно и безопасно.
+                </p>
+              </div>
+            </div>
+
+            <div class="benefit">
+              <div class="benefit-emoji">🧡</div>
+              <div>
+                <div class="benefit-title">Небольшие группы</div>
+                <p class="benefit-text">
+                  До 10 человек в группе — чтобы все успели сделать кадры, задать вопросы и не потеряться в толпе.
+                </p>
+              </div>
+            </div>
+
+            <div class="benefit">
+              <div class="benefit-emoji">🍊</div>
+              <div>
+                <div class="benefit-title">Эстетика и забота</div>
+                <p class="benefit-text">
+                  Подбираем локации с красивым светом, мандариновыми садами и уютными террасами, где приятно просто быть.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section id="faq">
+        <div class="wrapper">
+          <div class="section-header">
+            <div>
+              <h2 class="section-title">Частые вопросы</h2>
+            </div>
+          </div>
+
+          <div class="faq-grid">
+            <div>
+              <details>
+                <summary><span>Что включено в стоимость тура?</span></summary>
+                <p>
+                  Обычно это проживание, трансферы по маршруту, часть экскурсий и сопровождение локального координатора.
+                  Авиабилеты обсуждаем отдельно — можем порекомендовать удобные рейсы.
+                </p>
+              </details>
+              <details>
+                <summary><span>Можно ли поехать одному/одной?</span></summary>
+                <p>
+                  Да, к нам часто присоединяются соло-путешественники. Помогаем подобрать комфортное размещение и соседей по туру, если нужно.
+                </p>
+              </details>
+              <details>
+                <summary><span>Когда лучше всего ехать в Марокко?</span></summary>
+                <p>
+                  Самые комфортные сезоны — весна и осень. Летом жарче, но это идеальное время для океана и расслабленных туров у моря.
+                </p>
+              </details>
+              <details>
+                <summary><span>Делаете ли вы индивидуальные туры?</span></summary>
+                <p>
+                  Да, можем собрать маршрут только под вас, пару или семью — с отдельным авто, персональным гидом и удобными датами.
+                </p>
+              </details>
+            </div>
+            <div class="faq-note">
+              Напиши нам, если у тебя есть особые запросы: вегетарианское питание, чувствительность к жаре,
+              желание «больше природы, меньше городов» — мы настроим маршрут под это.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section id="contact">
+        <div class="wrapper">
+          <div class="contact-card">
+            <div>
+              <h3>Расскажи, какой Марокко хочешь ты</h3>
+              <p>
+                Оставь контакты и пару фраз о желаемых датах и формате поездки — мы вернёмся с идеями маршрута и примерной стоимостью.
+              </p>
+              <form>
+                <label>
+                  Имя
+                  <input type="text" name="name" placeholder="Как к тебе обращаться?" />
+                </label>
+                <label>
+                  Контакт (WhatsApp / Telegram / e-mail)
+                  <input type="text" name="contact" placeholder="@username или номер телефона" />
+                </label>
+                <label>
+                  Сообщение
+                  <textarea name="message" placeholder="Примерные даты, сколько человек, какой формат отдыха хочется?"></textarea>
+                </label>
+                <button type="submit" class="btn-primary">
+                  Отправить запрос на тур
+                </button>
+              </form>
+            </div>
+            <div class="contact-meta">
+              <div>Или напиши нам напрямую:</div>
+              <div>WhatsApp: <a href="#">+212&nbsp;XX&nbsp;XXX&nbsp;XX&nbsp;XX</a></div>
+              <div>Instagram: <a href="#">@mandarin.morocco</a></div>
+              <div>
+                Мы находимся в Марракеше и всегда можем подсказать по погоде, одежде и бюджету на каждый день.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="wrapper">
+        <div class="footer-inner">
+          <div>© <span id="year"></span> Mandarin Morocco. Все права защищены.</div>
+          <div>Сделано с любовью к Марокко и мандаринам 🍊</div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // Текущий год в футере
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
