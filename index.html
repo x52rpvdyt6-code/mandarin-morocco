@@ -3,165 +3,734 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Mandarin Morocco — авторские туры</title>
+<title>Mandarin Morocco — авторские туры по Марокко</title>
 
 <style>
-/* ——— Глобальные стили ——— */
+:root {
+  --orange: #ff8f2f;
+  --orange-soft: #ffb150;
+  --bg-dark: #050509;
+  --glass: rgba(5, 5, 12, 0.78);
+  --border-soft: rgba(255, 255, 255, 0.1);
+}
+
+/* сброс */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 body {
-    margin: 0;
-    padding: 0;
-    font-family: -apple-system, BlinkMacSystemFont, Inter, sans-serif;
-    color: white;
-    overflow-x: hidden;
-    position: relative;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", Inter, system-ui, sans-serif;
+  color: #fff;
+  background: var(--bg-dark);
+  overflow-x: hidden;
 }
 
-/* Фон — мандарины + затемнение */
+/* ФОН: мандарины + затемнение
+   ⚠️ имя файла должно совпадать с тем, что в репозитории.
+   Если у тебя другое, просто поменяй его в url(...) */
 body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    background:
-        linear-gradient(180deg, rgba(5,5,9,0.85), rgba(5,5,9,0.92)),
-        url("mandarins-morocco.jpg.PNG") center/cover no-repeat;
-    z-index: -1;
-    pointer-events: none;
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(circle at top left, rgba(255, 143, 47, 0.16), transparent 55%),
+    linear-gradient(180deg, rgba(5,5,9,0.86), rgba(5,5,9,0.96)),
+    url("mandarins-morocco.jpg.PNG") center/cover no-repeat;
+  z-index: -1;
+  pointer-events: none;
 }
 
-/* ——— Хедер ——— */
+/* Лёгкое свечение поверх */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(circle at bottom right, rgba(255, 143, 47, 0.18), transparent 60%);
+  z-index: -1;
+}
+
+/* анимации */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float-soft {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+  100% { transform: translateY(0); }
+}
+
+/* контейнер */
+.page {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 16px 16px 72px;
+}
+
+/* Хедер */
 header {
-    width: 100%;
-    padding: 16px 24px;
-    display: flex;
-    align-items: center;
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    backdrop-filter: blur(18px);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  backdrop-filter: blur(16px);
+  background: linear-gradient(
+    to bottom,
+    rgba(5,5,9,0.9),
+    rgba(5,5,9,0.7),
+    transparent
+  );
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  margin-bottom: 24px;
+}
+
+.header-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 10px 16px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
 }
 
 .logo {
-    display: flex;
-    align-items: center;
-    font-size: 20px;
-    font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-.logo img {
-    width: 32px;
-    margin-right: 10px;
+.logo-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 12px;
+  background: radial-gradient(circle at 30% 20%, #ffe69b, #ff8f2f);
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.24),
+    0 10px 24px rgba(0,0,0,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
 }
 
-/* ——— Главный блок ——— */
-.container {
-    padding: 40px 24px 80px;
-    max-width: 900px;
-    margin: auto;
+.logo-text-main {
+  font-weight: 600;
+  font-size: 16px;
+  letter-spacing: 0.02em;
+}
+
+.logo-text-sub {
+  font-size: 11px;
+  opacity: 0.75;
+}
+
+.header-pill {
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.18);
+  background:
+    radial-gradient(circle at 0 0, rgba(255,143,47,0.36), rgba(6,6,14,0.98));
+  font-size: 11px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* hero */
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  gap: 28px;
+  align-items: flex-start;
+  margin-top: 10px;
+}
+
+@media (max-width: 800px) {
+  .hero {
+    grid-template-columns: 1fr;
+  }
+}
+
+.hero-left {
+  animation: fade-in-up 0.6s ease-out both;
+}
+
+.badge-top {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  opacity: 0.9;
+  padding: 5px 11px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.18);
+  background: rgba(5,5,10,0.8);
+  margin-bottom: 14px;
+}
+
+.badge-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: #6bfd9b;
+  box-shadow: 0 0 0 4px rgba(72, 219, 150, 0.25);
 }
 
 h1 {
-    font-size: 38px;
-    line-height: 1.2;
-    margin-bottom: 18px;
+  font-size: clamp(30px, 6vw, 40px);
+  line-height: 1.1;
+  margin-bottom: 14px;
 }
 
-.orange {
-    color: #ff8f2f;
-    font-weight: 600;
+.highlight {
+  color: var(--orange);
 }
 
-/* Кнопка */
+.hero-lead {
+  font-size: 15px;
+  line-height: 1.6;
+  opacity: 0.92;
+  max-width: 520px;
+  margin-bottom: 22px;
+}
+
+/* кнопки */
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
 .btn-main {
-    display: inline-block;
-    margin-top: 24px;
-    background: linear-gradient(90deg, #ff7a1a, #ff9e32);
-    color: white;
-    padding: 16px 26px;
-    border-radius: 12px;
-    font-size: 18px;
-    font-weight: 600;
-    text-decoration: none;
-    box-shadow: 0 6px 20px rgba(255,140,30,0.35);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 13px 22px;
+  border-radius: 999px;
+  border: none;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  background: linear-gradient(120deg, var(--orange), var(--orange-soft));
+  color: #1b1307;
+  box-shadow: 0 15px 38px rgba(255,143,47,0.55);
+  cursor: pointer;
+  transition: transform 0.15s ease-out, box-shadow 0.15s ease-out;
+}
+
+.btn-main:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 44px rgba(255,143,47,0.7);
 }
 
 .btn-wa {
-    display: inline-block;
-    margin-top: 12px;
-    padding: 14px 22px;
-    border-radius: 12px;
-    border: 1px solid rgba(255,255,255,0.5);
-    text-decoration: none;
-    font-size: 17px;
-    color: white;
-    backdrop-filter: blur(10px);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.26);
+  background: rgba(8,8,16,0.92);
+  font-size: 14px;
+  color: #fff;
+  text-decoration: none;
+  backdrop-filter: blur(10px);
 }
 
-/* ——— Карточки туров ——— */
+.btn-wa span:first-child {
+  font-size: 16px;
+}
+
+.hero-note {
+  font-size: 12px;
+  opacity: 0.75;
+}
+
+/* hero справа */
+.hero-right {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  animation: fade-in-up 0.7s ease-out both;
+}
+
+.mini-card {
+  background: var(--glass);
+  border-radius: 22px;
+  border: 1px solid var(--border-soft);
+  padding: 16px 16px 14px;
+  box-shadow: 0 18px 42px rgba(0,0,0,0.7);
+  position: relative;
+  overflow: hidden;
+}
+
+.mini-card::after {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  background:
+    radial-gradient(circle at 0 0, rgba(255,143,47,0.2), transparent 58%);
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+.mini-card-inner {
+  position: relative;
+  z-index: 1;
+}
+
+.mini-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  opacity: 0.7;
+  margin-bottom: 6px;
+}
+
+.mini-title {
+  font-size: 15px;
+  margin-bottom: 6px;
+}
+
+.mini-text {
+  font-size: 13px;
+  opacity: 0.88;
+  margin-bottom: 8px;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.chip {
+  font-size: 11px;
+  padding: 5px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.18);
+  background: rgba(0,0,0,0.3);
+  opacity: 0.9;
+}
+
+/* блок туров */
+.section {
+  margin-top: 40px;
+  animation: fade-in-up 0.8s ease-out both;
+}
+
+.section-title {
+  font-size: 18px;
+  margin-bottom: 6px;
+}
+
+.section-subtitle {
+  font-size: 13px;
+  opacity: 0.8;
+  margin-bottom: 18px;
+}
+
 .tours {
-    margin-top: 60px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 18px;
 }
 
 .tour-card {
-    background: rgba(0,0,0,0.35);
-    padding: 26px;
-    border-radius: 20px;
-    margin-bottom: 26px;
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255,255,255,0.06);
+  background: rgba(5,5,12,0.9);
+  border-radius: 24px;
+  padding: 18px 16px 16px;
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.75);
+  position: relative;
+  overflow: hidden;
 }
 
-.tour-card h2 {
-    font-size: 26px;
-    margin-bottom: 10px;
+.tour-card::before {
+  content: "";
+  position: absolute;
+  inset: -20%;
+  background: radial-gradient(circle at 0 0, rgba(255,143,47,0.18), transparent 55%);
+  opacity: 0.9;
+  pointer-events: none;
 }
 
-.tour-card p {
-    opacity: 0.9;
-    line-height: 1.5;
+.tour-inner {
+  position: relative;
+  z-index: 1;
+}
+
+.tour-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: rgba(0,0,0,0.45);
+  border: 1px solid rgba(255,255,255,0.14);
+  margin-bottom: 8px;
+  opacity: 0.9;
+}
+
+.tour-title {
+  font-size: 20px;
+  margin-bottom: 6px;
+}
+
+.tour-desc {
+  font-size: 13px;
+  opacity: 0.86;
+  margin-bottom: 8px;
+}
+
+.tour-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.tour-meta span {
+  font-size: 11px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  opacity: 0.9;
+}
+
+.tour-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 12px;
+}
+
+.price-pill {
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(4, 150, 94, 0.26);
+  border: 1px solid rgba(132, 255, 201, 0.7);
+  color: #d7ffe9;
+  font-weight: 500;
+}
+
+.tour-link {
+  color: var(--orange-soft);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+/* блок заявки */
+.request-section {
+  margin-top: 40px;
+  animation: fade-in-up 0.9s ease-out both;
+}
+
+.request-card {
+  background: rgba(5,5,12,0.92);
+  border-radius: 24px;
+  padding: 18px 16px 18px;
+  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow: 0 18px 42px rgba(0,0,0,0.8);
+  position: relative;
+  overflow: hidden;
+}
+
+.request-card::before {
+  content: "";
+  position: absolute;
+  inset: -30%;
+  background:
+    radial-gradient(circle at top right, rgba(255,143,47,0.28), transparent 58%);
+  opacity: 0.9;
+}
+
+.request-inner {
+  position: relative;
+  z-index: 1;
+}
+
+.request-title {
+  font-size: 18px;
+  margin-bottom: 6px;
+}
+
+.request-text {
+  font-size: 13px;
+  opacity: 0.9;
+  margin-bottom: 14px;
+}
+
+.request-fields {
+  display: grid;
+  grid-template-columns: 1.3fr 1.3fr;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+@media (max-width: 700px) {
+  .request-fields {
+    grid-template-columns: 1fr;
+  }
+}
+
+.input {
+  background: rgba(0,0,0,0.4);
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.14);
+  padding: 10px 11px;
+  font-size: 13px;
+  color: #fff;
+  outline: none;
+}
+
+.input::placeholder {
+  color: rgba(255,255,255,0.55);
+}
+
+textarea.input {
+  resize: vertical;
+  min-height: 70px;
+}
+
+.request-note {
+  font-size: 11px;
+  opacity: 0.75;
+}
+
+/* футер */
+footer {
+  margin-top: 36px;
+  font-size: 11px;
+  opacity: 0.7;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 6px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding-top: 14px;
+}
+
+footer a {
+  color: var(--orange-soft);
+  text-decoration: none;
 }
 </style>
 </head>
 
 <body>
+<div class="page">
 
-<header>
-    <div class="logo">
-        🍊 Mandarin Morocco
+  <header>
+    <div class="header-inner">
+      <div class="logo">
+        <div class="logo-icon">🍊</div>
+        <div>
+          <div class="logo-text-main">Mandarin Morocco</div>
+          <div class="logo-text-sub">Марокко, где пахнет мандаринами и океаном</div>
+        </div>
+      </div>
+      <div class="header-pill">
+        <span>🍊</span><span>Авторские туры · Марракеш · Сахара · Атлантика</span>
+      </div>
     </div>
-</header>
+  </header>
 
-<div class="container">
-    <p style="opacity:0.8; margin-bottom:10px;">🍊 Авторские туры по Марокко</p>
-
-    <h1>Марокко, где пахнет <span class="orange">мандаринами</span> и океаном.</h1>
-
-    <p>
-        Собираем маршруты под тебя: Марракеш, Сахара, Эссуэйра, горы и маленькие рыбацкие города — без толпы, с любимыми видами и вкусной едой.
-    </p>
-
-    <a href="#tours" class="btn-main">Смотреть варианты туров</a><br>
-    <a href="https://wa.me/212000000000" class="btn-wa">Написать в WhatsApp</a>
-
-    <div id="tours" class="tours">
-
-        <div class="tour-card">
-            <h2>🌅 Sunset & Mandarins</h2>
-            <p>Закатные локации Марракеша, апельсиновые сады и фотосессии в лучших точках города.</p>
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-left">
+        <div class="badge-top">
+          <span class="badge-dot"></span>
+          <span>Небольшие группы · 4–10 человек</span>
         </div>
 
-        <div class="tour-card">
-            <h2>🏜 Sahara Orange</h2>
-            <p>Поездка в Сахару, где дюны отражают закат в оттенках мандарина. Уютный кемпинг, танцы и звёзды.</p>
+        <h1>Марокко, где пахнет <span class="highlight">мандаринами</span> и океаном.</h1>
+
+        <p class="hero-lead">
+          Собираем маршрут под тебя: Марракеш, Сахара, Эссуэйра, горы и маленькие
+          рыбацкие города — без толпы, с любимыми видами, уютными риадами и вкусной едой.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#tours" class="btn-main">Смотреть варианты туров</a>
+          <a href="https://wa.me/2120000000000" target="_blank" class="btn-wa">
+            <span>💬</span><span>Написать в WhatsApp</span>
+          </a>
         </div>
 
-        <div class="tour-card">
-            <h2>🌊 Essaouira Breeze</h2>
-            <p>Рыбацкие улочки, рынок специй, апельсиновые корзины и шум океана.</p>
+        <div class="hero-note">
+          Форматы 4–10 дней · Поможем с перелётом и подбором жилья под твой бюджет.
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="mini-card" style="animation: float-soft 6s ease-in-out infinite;">
+          <div class="mini-card-inner">
+            <div class="mini-label">Почему это не обычный турпакет</div>
+            <div class="mini-title">Мы живём в Марокко и знаем, где по-настоящему классно.</div>
+            <div class="mini-text">
+              Не возим в «обязательные» лавки и рестораны для автобусов с туристами.
+              Только те места, где мы отдыхаем сами.
+            </div>
+            <div class="chips">
+              <div class="chip">уютные риады</div>
+              <div class="chip">кафе без толпы</div>
+              <div class="chip">фотогеничные локации</div>
+            </div>
+          </div>
         </div>
 
-    </div>
+        <div class="mini-card">
+          <div class="mini-card-inner">
+            <div class="mini-label">Как всё устроено</div>
+            <div class="mini-title">Созвон · желание · маршрут.</div>
+            <div class="mini-text">
+              Созваниваемся, слушаем, чего ты хочешь от Марокко — море, пустыня, базары,
+              горы или всё сразу — и собираем маршрут под твой ритм.
+            </div>
+            <div class="chips">
+              <div class="chip">зум-знакомство</div>
+              <div class="chip">гибкие даты</div>
+              <div class="chip">поддержка в WhatsApp 24/7</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Форматы туров -->
+    <section id="tours" class="section">
+      <div class="section-title">Форматы туров</div>
+      <div class="section-subtitle">
+        Можно взять как есть или адаптировать под твои даты, интересы и бюджет.
+      </div>
+
+      <div class="tours">
+        <article class="tour-card">
+          <div class="tour-inner">
+            <div class="tour-tag">
+              <span>🌿</span><span>Марракеш · апельсиновые сады</span>
+            </div>
+            <div class="tour-title">Sunset &amp; Mandarins</div>
+            <div class="tour-desc">
+              4 дня в Марракеше: сады, рынки, апельсиновые деревья, завтраки на террасах и
+              закаты на крыше риада.
+            </div>
+            <div class="tour-meta">
+              <span>4 дня / 3 ночи</span>
+              <span>Марракеш</span>
+              <span>идеально для первого раза</span>
+            </div>
+            <div class="tour-bottom">
+              <div class="price-pill">от 750 € за человека</div>
+              <a href="https://wa.me/2120000000000" target="_blank" class="tour-link">
+                Узнать программу в WhatsApp →
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <article class="tour-card">
+          <div class="tour-inner">
+            <div class="tour-tag">
+              <span>🏜️</span><span>Сахара · берберский лагерь</span>
+            </div>
+            <div class="tour-title">Desert &amp; Stars</div>
+            <div class="tour-desc">
+              6–7 дней: дорога через Атлас, верблюды, ночь в комфортабельном лагере в
+              Сахаре, костёр и небо, усыпанное звёздами.
+            </div>
+            <div class="tour-meta">
+              <span>6–7 дней</span>
+              <span>Марракеш · Мерзуга</span>
+              <span>комфортный кемпинг</span>
+            </div>
+            <div class="tour-bottom">
+              <div class="price-pill">от 1150 € за человека</div>
+              <a href="https://wa.me/2120000000000" target="_blank" class="tour-link">
+                Забронировать даты →
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <article class="tour-card">
+          <div class="tour-inner">
+            <div class="tour-tag">
+              <span>🌊</span><span>Атлантика · рыбацкие города</span>
+            </div>
+            <div class="tour-title">Ocean &amp; Oranges</div>
+            <div class="tour-desc">
+              5 дней на побережье: Эссуэйра, шум океана, свежая рыба, бело-синие улочки и
+              мандарины с утреннего рынка.
+            </div>
+            <div class="tour-meta">
+              <span>5 дней / 4 ночи</span>
+              <span>Марракеш · Эссуэйра</span>
+              <span>спокойный ритм</span>
+            </div>
+            <div class="tour-bottom">
+              <div class="price-pill">от 890 € за человека</div>
+              <a href="https://wa.me/2120000000000" target="_blank" class="tour-link">
+                Обсудить маршрут →
+              </a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Заявка -->
+    <section class="request-section">
+      <div class="request-card">
+        <div class="request-inner">
+          <div class="request-title">Оставить заявку</div>
+          <div class="request-text">
+            Напиши, когда хочешь прилететь и какой формат тебе ближе — море, пустыня,
+            города или микс. Ответим в WhatsApp, предложим маршрут и ориентир по бюджету.
+          </div>
+
+          <div class="request-fields">
+            <input class="input" type="text" placeholder="Имя" />
+            <input class="input" type="text" placeholder="Ваш WhatsApp" />
+          </div>
+
+          <textarea class="input" placeholder="Кратко опиши, чего хочешь от Марокко: даты, формат, бюджет."></textarea>
+
+          <div style="margin-top: 14px; display:flex; flex-wrap:wrap; gap:10px; align-items:center;">
+            <a href="https://wa.me/2120000000000" target="_blank" class="btn-wa">
+              <span>🍊</span><span>Отправить заявку в WhatsApp</span>
+            </a>
+            <div class="request-note">
+              Кнопка откроет диалог в WhatsApp — ты просто скопируешь текст отсюда и отправишь.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div>© Mandarin Morocco, 2025 · Авторские туры по Марокко</div>
+    <div>Связаться: <a href="https://wa.me/2120000000000" target="_blank">WhatsApp</a></div>
+  </footer>
 
 </div>
-
 </body>
 </html>
